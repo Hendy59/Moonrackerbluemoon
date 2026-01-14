@@ -14,7 +14,8 @@ const gameState = {
     },
     deck: 20,
     discard: 0,
-    hand: []
+    hand: [],
+    nextCardId: 1 // Counter for unique card IDs
 };
 
 // Contract Templates
@@ -280,7 +281,8 @@ function purchaseItem(item) {
             addResource(item.resource, item.amount);
             logAction(`Purchased ${item.title} for ${item.cost} credits.`);
         } else if (item.type === 'crew') {
-            logAction(`Hired ${item.title} for ${item.cost} credits.`);
+            // Note: Crew mechanics are a planned enhancement for future updates
+            logAction(`Hired ${item.title} for ${item.cost} credits. (Crew effects coming soon!)`);
         }
         
         updateUI();
@@ -294,7 +296,7 @@ function dealInitialHand() {
     gameState.hand = [];
     for (let i = 0; i < 5; i++) {
         const randomCard = cardTemplates[Math.floor(Math.random() * cardTemplates.length)];
-        gameState.hand.push({ ...randomCard, id: Date.now() + i });
+        gameState.hand.push({ ...randomCard, id: gameState.nextCardId++ });
     }
     displayHand();
 }
@@ -392,7 +394,7 @@ function nextPhase() {
             for (let i = 0; i < cardsToDraw; i++) {
                 if (gameState.deck > 0) {
                     const randomCard = cardTemplates[Math.floor(Math.random() * cardTemplates.length)];
-                    gameState.hand.push({ ...randomCard, id: Date.now() + i });
+                    gameState.hand.push({ ...randomCard, id: gameState.nextCardId++ });
                     gameState.deck--;
                 }
             }
