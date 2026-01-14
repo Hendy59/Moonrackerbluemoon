@@ -3,69 +3,8 @@
 // Game State
 const gameState = {
     lunarCoins: 5,
-    installedParts: [],
-    completedObjectives: []
+    installedParts: []
 };
-
-// Objectives - Complete these to earn Lunar Coins
-const objectives = [
-    {
-        id: 1,
-        title: "First Steps",
-        description: "Complete your first mission",
-        reward: 2,
-        completed: false
-    },
-    {
-        id: 2,
-        title: "Resource Collector",
-        description: "Gather materials from asteroid fields",
-        reward: 3,
-        completed: false
-    },
-    {
-        id: 3,
-        title: "Deep Space Explorer",
-        description: "Venture into uncharted territories",
-        reward: 4,
-        completed: false
-    },
-    {
-        id: 4,
-        title: "Lunar Prospector",
-        description: "Mine rare minerals from distant moons",
-        reward: 5,
-        completed: false
-    },
-    {
-        id: 5,
-        title: "Stellar Cartographer",
-        description: "Map unknown star systems",
-        reward: 3,
-        completed: false
-    },
-    {
-        id: 6,
-        title: "Void Navigator",
-        description: "Traverse the mysterious void",
-        reward: 6,
-        completed: false
-    },
-    {
-        id: 7,
-        title: "Ancient Discovery",
-        description: "Uncover artifacts from lost civilizations",
-        reward: 7,
-        completed: false
-    },
-    {
-        id: 8,
-        title: "Master Explorer",
-        description: "Complete all exploration challenges",
-        reward: 10,
-        completed: false
-    }
-];
 
 // Ship Parts - Unique items purchasable with Lunar Coins
 const shipParts = [
@@ -138,70 +77,13 @@ const shipParts = [
 // Initialize Game
 function initGame() {
     logAction("🌙 Welcome to the Lunar Bazaar...");
-    logAction("Complete objectives to earn Lunar Coins and purchase unique ship parts.");
-    
-    // Generate objectives
-    generateObjectives();
+    logAction("Use Lunar Coins earned from board game objectives to purchase unique ship parts.");
     
     // Generate bazaar items
     generateBazaar();
     
     // Update UI
     updateUI();
-}
-
-// Generate Objectives
-function generateObjectives() {
-    const objectivesList = document.getElementById('objectives-list');
-    objectivesList.innerHTML = '';
-    
-    objectives.forEach(objective => {
-        const objectiveCard = createObjectiveCard(objective);
-        objectivesList.appendChild(objectiveCard);
-    });
-}
-
-// Create Objective Card
-function createObjectiveCard(objective) {
-    const card = document.createElement('div');
-    card.className = 'objective-card' + (objective.completed ? ' completed' : '');
-    card.dataset.id = objective.id;
-    
-    card.innerHTML = `
-        <div class="objective-title">${objective.title}</div>
-        <div class="objective-description">${objective.description}</div>
-        <div class="objective-reward">
-            <span>🌙</span>
-            <span>${objective.reward} Lunar Coins</span>
-            ${objective.completed ? '<span style="margin-left: 10px;">✓ Completed</span>' : ''}
-        </div>
-    `;
-    
-    if (!objective.completed) {
-        card.addEventListener('click', () => completeObjective(objective));
-    }
-    
-    return card;
-}
-
-// Complete Objective
-function completeObjective(objective) {
-    if (objective.completed) return;
-    
-    objective.completed = true;
-    gameState.completedObjectives.push(objective.id);
-    gameState.lunarCoins += objective.reward;
-    
-    logAction(`✅ Completed "${objective.title}"! Earned ${objective.reward} 🌙 Lunar Coins.`, 'success');
-    
-    // Regenerate objectives display
-    generateObjectives();
-    updateUI();
-    
-    // Check if all objectives complete
-    if (gameState.completedObjectives.length === objectives.length) {
-        logAction("🎉 All objectives completed! You are a Master Explorer!", 'success');
-    }
 }
 
 // Generate Bazaar

@@ -4,55 +4,43 @@ A web-based expansion inspired by Risk of Rain 2's Lunar Coins system for the Mo
 
 ## About
 
-The Lunar Bazaar is a unique expansion where players complete objectives to earn Lunar Coins (🌙), which can be spent at the mysterious bazaar to purchase powerful and unique ship parts. Inspired by the Lunar Coin system from Risk of Rain 2, this experience focuses on collecting rare currency to unlock permanent ship upgrades.
+The Lunar Bazaar is a companion web app for the Moonrackers board game. Players use Lunar Coins earned from completing objectives with the physical board game cards to purchase powerful and unique ship parts at the digital Lunar Bazaar. Inspired by the Lunar Coin system from Risk of Rain 2, this experience focuses on collecting rare currency to unlock permanent ship upgrades.
 
 ## Features
 
-- **Lunar Coin System**: Complete objectives to earn valuable Lunar Coins
-- **8 Unique Objectives**: Various missions that reward you with Lunar Coins
-- **8 Powerful Ship Parts**: Unique upgrades purchasable only with Lunar Coins
-- **Central Ship Display**: Your ship sits in the center of the void, surrounded by opportunities
+- **Lunar Coin System**: Use Lunar Coins earned from board game objectives
+- **8 Unique Ship Parts**: Powerful upgrades purchasable only with Lunar Coins
+- **Central Ship Display**: Your ship sits in the center with installed parts shown
 - **Void-Themed Aesthetic**: Dark, purple-blue color scheme inspired by Risk of Rain 2
 - **Progressive Upgrades**: Track your ship's improvement as you install more parts
 
 ## How to Play
 
-1. Open `index.html` in your web browser
-2. Start with 5 Lunar Coins
-3. Complete objectives on the left to earn more Lunar Coins
-   - Click on any uncompleted objective to complete it
-   - Each objective rewards different amounts of Lunar Coins
-4. Use your Lunar Coins at the Lunar Bazaar (right side) to purchase ship parts
+1. Open `index.html` in your web browser alongside your Moonrackers board game
+2. Start with 5 Lunar Coins in the digital bazaar
+3. Play the physical Moonrackers board game using the objective cards
+4. When you complete objectives from the board game cards, you earn Lunar Coins
+5. Use your Lunar Coins at the Lunar Bazaar (web app) to purchase ship parts
    - Each part is unique and provides special abilities
    - Parts range from 4-12 Lunar Coins
-5. Watch your ship grow stronger as you install parts
-6. Goal: Complete all objectives and collect all 8 ship parts!
+6. Watch your ship grow stronger as you install parts
+7. Goal: Complete objectives and collect all 8 ship parts!
 
 ## Game Elements
 
 ### Lunar Coins 🌙
-The mysterious currency used in the void. Earned by completing objectives and used to purchase unique ship parts at the Lunar Bazaar.
-
-### Objectives
-Complete various missions such as:
-- First Steps (2 🌙)
-- Resource Collector (3 🌙)
-- Deep Space Explorer (4 🌙)
-- Lunar Prospector (5 🌙)
-- Void Navigator (6 🌙)
-- Ancient Discovery (7 🌙)
-- Master Explorer (10 🌙)
+The mysterious currency used in the void. Earned by completing objectives from the physical board game cards and used to purchase unique ship parts at the Lunar Bazaar web app.
 
 ### Ship Parts
 Unique upgrades including:
-- **Quantum Drive**: Increases travel speed
-- **Void Shield Generator**: Protection from void damage
-- **Stellar Compass**: Reveals hidden paths
-- **Lunar Harvester**: Auto-collects resources
-- **Phase Stabilizer**: Access to wormholes
-- **Cosmic Scanner**: Enhanced detection
-- **Void Engine Core**: Massive power boost
-- **Time Dilation Field**: Slow-motion combat
+- **Quantum Drive** (5🌙): Increases travel speed
+- **Void Shield Generator** (7🌙): Protection from void damage
+- **Stellar Compass** (4🌙): Reveals hidden paths
+- **Lunar Harvester** (6🌙): Auto-collects resources
+- **Phase Stabilizer** (8🌙): Access to wormholes
+- **Cosmic Scanner** (5🌙): Enhanced detection
+- **Void Engine Core** (10🌙): Massive power boost
+- **Time Dilation Field** (12🌙): Slow-motion combat
 
 ## Visual Style
 
@@ -62,6 +50,7 @@ The Lunar Bazaar features:
 - Glowing lunar coin display
 - SVG ship in the center of the screen
 - Risk of Rain 2 inspired color palette and effects
+- Sci-fi themed typography
 
 ## Technologies
 
@@ -78,7 +67,7 @@ This expansion is inspired by Risk of Rain 2's Lunar Bazaar, where players use r
 ## Credits
 
 Based on the Moonrackers board game by IV Studios.
-Lunar Bazaar expansion concept inspired by Risk of Rain 2's lunar mechanics.
+Lunar Bazaar companion app concept inspired by Risk of Rain 2's lunar mechanics.
 
 ---
 

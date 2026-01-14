@@ -1,5 +1,8 @@
 /* Moonrackers Lunar Bazaar - Risk of Rain 2 Inspired */
 
+/* Import Google Fonts - Similar to Moonrackers style */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap');
+
 :root {
     --primary-dark: #0a0e1a;
     --secondary-dark: #1a1f2e;
@@ -20,7 +23,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--primary-dark);
     color: var(--text-light);
     min-height: 100vh;
@@ -92,18 +95,21 @@ body::after {
 }
 
 .game-header h1 {
+    font-family: 'Orbitron', sans-serif;
     font-size: 3em;
     color: var(--text-gold);
     text-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(139, 92, 246, 0.6);
     letter-spacing: 12px;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 .subtitle {
+    font-family: 'Rajdhani', sans-serif;
     font-size: 1.1em;
     color: var(--lunar-glow);
     margin-top: 10px;
     opacity: 0.9;
+    font-weight: 600;
 }
 
 /* Lunar Currency Display */
@@ -147,80 +153,15 @@ body::after {
     text-shadow: 0 0 15px rgba(96, 165, 250, 0.8);
 }
 
-/* Main Game Area - Three Columns */
+/* Main Game Area - Two Columns */
 .main-game-area {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 25px;
     margin-bottom: 30px;
 }
 
-/* Objectives Section (Left) */
-.objectives-section {
-    background: rgba(26, 31, 46, 0.9);
-    padding: 20px;
-    border-radius: 12px;
-    border: 2px solid var(--accent-purple);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-}
-
-.objectives-section h2 {
-    color: var(--text-gold);
-    margin-bottom: 20px;
-    font-size: 1.4em;
-    text-align: center;
-    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
-}
-
-.objectives-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.objective-card {
-    background: rgba(10, 14, 26, 0.8);
-    padding: 15px;
-    border-radius: 8px;
-    border: 2px solid var(--void-purple);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.objective-card:hover {
-    transform: translateX(5px);
-    border-color: var(--lunar-blue);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-}
-
-.objective-card.completed {
-    opacity: 0.6;
-    border-color: var(--success-green);
-}
-
-.objective-title {
-    font-weight: bold;
-    color: var(--lunar-glow);
-    margin-bottom: 8px;
-    font-size: 1.1em;
-}
-
-.objective-description {
-    font-size: 0.9em;
-    color: var(--text-light);
-    margin-bottom: 10px;
-    opacity: 0.8;
-}
-
-.objective-reward {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--text-gold);
-    font-weight: bold;
-}
-
-/* Ship Section (Center) */
+/* Ship Section (Left - Larger) */
 .ship-section {
     background: rgba(26, 31, 46, 0.95);
     padding: 30px;
