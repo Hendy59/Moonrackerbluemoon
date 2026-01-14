@@ -1,0 +1,377 @@
+/* Moonrackers Lunar Bazaar - Moonrackers Game Style */
+
+/* Import Google Fonts - Similar to Moonrackers style */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap');
+
+:root {
+    --moonracker-navy: #1a2332;
+    --moonracker-dark: #0f1419;
+    --moonracker-card: #1e2838;
+    --moonracker-border: #3d4e6a;
+    --moonracker-gold: #f4c430;
+    --text-light: #e8edf2;
+    --text-dim: #a8b5c9;
+    --card-border-glow: #5a6b8c;
+    --success-green: #4ade80;
+    --lunar-coin: #9d8cff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--moonracker-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Starfield Background - Similar to Moonrackers */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(1px 1px at 20px 30px, white, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 60px 70px, white, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 50px, white, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 130px 80px, white, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 10px, white, rgba(0,0,0,0));
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.game-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header - Moonrackers Style */
+.game-header {
+    text-align: center;
+    padding: 30px 0;
+    background: var(--moonracker-navy);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 3px solid var(--moonracker-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.game-header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    color: var(--moonracker-gold);
+    text-shadow: 0 2px 8px rgba(244, 196, 48, 0.5);
+    letter-spacing: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1em;
+    color: var(--text-dim);
+    margin-top: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* Lunar Currency Display - Card Style */
+.lunar-currency {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.coin-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--moonracker-card);
+    padding: 15px 40px;
+    border-radius: 10px;
+    border: 2px solid var(--card-border-glow);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.coin-icon {
+    font-size: 2em;
+    filter: drop-shadow(0 2px 4px rgba(157, 140, 255, 0.6));
+}
+
+.coin-label {
+    font-size: 1.3em;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.coin-value {
+    font-size: 2.2em;
+    color: var(--lunar-coin);
+    font-weight: bold;
+}
+
+/* Main Game Area - Two Columns */
+.main-game-area {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+/* Ship Section (Left column - 2/3 width) */
+.ship-section {
+    background: var(--moonracker-navy);
+    padding: 30px;
+    border-radius: 12px;
+    border: 3px solid var(--moonracker-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ship-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.ship-display {
+    margin: 0 auto 20px;
+    max-width: 250px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.ship-svg {
+    width: 100%;
+    height: auto;
+}
+
+.ship-info h3 {
+    color: var(--moonracker-gold);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.ship-status {
+    color: var(--text-dim);
+    font-size: 1.1em;
+}
+
+/* Installed Parts */
+.installed-parts {
+    margin-top: 20px;
+}
+
+.installed-parts h4 {
+    color: var(--moonracker-gold);
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.parts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.part-item {
+    background: var(--moonracker-card);
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid var(--moonracker-border);
+    text-align: center;
+}
+
+.part-item-name {
+    font-weight: bold;
+    color: var(--moonracker-gold);
+    font-size: 0.95em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.part-item-effect {
+    font-size: 0.85em;
+    color: var(--text-light);
+}
+
+/* Bazaar Section (Right) - Moonrackers Card Style */
+.bazaar-section {
+    background: var(--moonracker-navy);
+    padding: 20px;
+    border-radius: 12px;
+    border: 3px solid var(--moonracker-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.bazaar-section h2 {
+    color: var(--moonracker-gold);
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    text-align: center;
+    font-weight: 700;
+}
+
+.bazaar-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bazaar-item {
+    background: var(--moonracker-card);
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid var(--moonracker-border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bazaar-item:hover {
+    border-color: var(--card-border-glow);
+    box-shadow: 0 4px 16px rgba(90, 107, 140, 0.4);
+    transform: translateY(-2px);
+}
+
+.bazaar-item.purchased {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--moonracker-dark);
+}
+
+.bazaar-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bazaar-item-name {
+    font-weight: 700;
+    color: var(--moonracker-gold);
+    font-size: 1.1em;
+}
+
+.bazaar-item-cost {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    color: var(--lunar-coin);
+    font-size: 1.1em;
+}
+
+.bazaar-item-description {
+    font-size: 0.9em;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+/* Action Log - Moonrackers Style */
+.action-log {
+    background: var(--moonracker-navy);
+    padding: 20px;
+    border-radius: 12px;
+    border: 3px solid var(--moonracker-border);
+    max-height: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.action-log h3 {
+    color: var(--moonracker-gold);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.log-content {
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    background: var(--moonracker-card);
+    border-radius: 4px;
+    border-left: 3px solid var(--moonracker-border);
+    font-size: 0.9em;
+    color: var(--text-light);
+}
+
+.log-entry:last-child {
+    margin-bottom: 0;
+}
+
+.log-entry.success {
+    border-left-color: var(--success-green);
+}
+
+.log-entry.error {
+    border-left-color: #ef4444;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--moonracker-dark);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--moonracker-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--card-border-glow);
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .main-game-area {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-header h1 {
+        font-size: 2em;
+        letter-spacing: 6px;
+    }
+
+    .coin-display {
+        padding: 15px 30px;
+    }
+
+    .coin-icon {
+        font-size: 2em;
+    }
+
+    .coin-label {
+        font-size: 1.2em;
+    }
+
+    .coin-value {
+        font-size: 2em;
+    }
+
+    .parts-grid {
+        grid-template-columns: 1fr;
+    }
+}

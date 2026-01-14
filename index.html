@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonrackers - Lunar Bazaar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1>LUNAR BAZAAR</h1>
+            <p class="subtitle">Moonrackers Expansion - Inspired by Risk of Rain 2</p>
+        </header>
+
+        <!-- Lunar Coins Display -->
+        <div class="lunar-currency">
+            <div class="coin-display">
+                <span class="coin-icon">🌙</span>
+                <span class="coin-label">Lunar Coins:</span>
+                <span class="coin-value" id="lunar-coins">5</span>
+            </div>
+        </div>
+
+        <!-- Main Game Area with Ship in Center -->
+        <div class="main-game-area">
+            <!-- Center - Ship Display -->
+            <section class="ship-section">
+                <div class="ship-container">
+                    <div class="ship-display" id="ship-display">
+                        <svg viewBox="0 0 200 200" class="ship-svg">
+                            <!-- Ship Body -->
+                            <ellipse cx="100" cy="100" rx="60" ry="40" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+                            <!-- Cockpit -->
+                            <ellipse cx="100" cy="85" rx="25" ry="20" fill="#2d3748" stroke="#4a5568" stroke-width="2"/>
+                            <ellipse cx="100" cy="85" rx="15" ry="12" fill="#63b3ed" opacity="0.6"/>
+                            <!-- Left Wing -->
+                            <path d="M 50 100 L 20 120 L 30 105 Z" fill="#718096" stroke="#4a5568" stroke-width="2"/>
+                            <!-- Right Wing -->
+                            <path d="M 150 100 L 180 120 L 170 105 Z" fill="#718096" stroke="#4a5568" stroke-width="2"/>
+                            <!-- Engine Glow -->
+                            <ellipse cx="100" cy="130" rx="20" ry="10" fill="#f56565" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;1;0.7" dur="1s" repeatCount="indefinite"/>
+                            </ellipse>
+                        </svg>
+                    </div>
+                    <div class="ship-info">
+                        <h3>Your Ship</h3>
+                        <p class="ship-status">Parts Installed: <span id="parts-count">0</span>/8</p>
+                    </div>
+                </div>
+
+                <!-- Ship Parts Display -->
+                <div class="installed-parts" id="installed-parts">
+                    <h4>Installed Parts</h4>
+                    <div class="parts-grid" id="parts-grid">
+                        <!-- Installed parts will appear here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side - Bazaar (Shop) -->
+            <section class="bazaar-section">
+                <h2>🏪 Lunar Bazaar</h2>
+                <div class="bazaar-items" id="bazaar-items">
+                    <!-- Shop items will be generated here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Action Log -->
+        <div class="action-log">
+            <h3>Activity Log</h3>
+            <div class="log-content" id="log-content">
+                <p class="log-entry">Welcome to the Lunar Bazaar...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
