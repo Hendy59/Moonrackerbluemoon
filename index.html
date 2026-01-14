@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonrackers - Digital Board Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1>MOONRACKERS</h1>
+            <p class="subtitle">A Digital Expansion by IV Studios</p>
+        </header>
+
+        <!-- Game Info Bar -->
+        <div class="game-info">
+            <div class="turn-tracker">
+                <span class="label">Turn:</span>
+                <span id="turn-number">1</span>
+            </div>
+            <div class="phase-tracker">
+                <span class="label">Phase:</span>
+                <span id="current-phase">Setup</span>
+            </div>
+            <button id="next-phase-btn" class="btn-primary">Next Phase</button>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="main-game-area">
+            <!-- Contracts Section -->
+            <section class="contracts-section">
+                <h2>Available Contracts</h2>
+                <div class="contracts-grid" id="contracts-grid">
+                    <!-- Contract cards will be generated here -->
+                </div>
+            </section>
+
+            <!-- Market Section -->
+            <section class="market-section">
+                <h2>Market</h2>
+                <div class="market-grid" id="market-grid">
+                    <!-- Market items will be generated here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Player Area -->
+        <div class="player-area">
+            <div class="player-info">
+                <h2>Your Company</h2>
+                <div class="player-stats">
+                    <div class="stat">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-label">Prestige:</span>
+                        <span class="stat-value" id="prestige">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">💰</span>
+                        <span class="stat-label">Credits:</span>
+                        <span class="stat-value" id="credits">10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="resources">
+                <h3>Resources</h3>
+                <div class="resource-grid">
+                    <div class="resource-item">
+                        <span class="resource-icon">🔋</span>
+                        <span class="resource-name">Energy</span>
+                        <span class="resource-count" id="energy">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">⚙️</span>
+                        <span class="resource-name">Parts</span>
+                        <span class="resource-count" id="parts">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">🧪</span>
+                        <span class="resource-name">Science</span>
+                        <span class="resource-count" id="science">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-icon">💎</span>
+                        <span class="resource-name">Exotic</span>
+                        <span class="resource-count" id="exotic">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Hand -->
+            <div class="player-hand">
+                <h3>Your Hand</h3>
+                <div class="hand-cards" id="hand-cards">
+                    <!-- Player cards will be generated here -->
+                </div>
+            </div>
+
+            <!-- Player Deck Info -->
+            <div class="deck-info">
+                <div class="deck-pile">
+                    <span class="pile-label">Deck:</span>
+                    <span class="pile-count" id="deck-count">20</span>
+                </div>
+                <div class="discard-pile">
+                    <span class="pile-label">Discard:</span>
+                    <span class="pile-count" id="discard-count">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Log -->
+        <div class="action-log">
+            <h3>Action Log</h3>
+            <div class="log-content" id="log-content">
+                <p class="log-entry">Game started. Welcome to Moonrackers!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
