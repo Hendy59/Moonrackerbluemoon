@@ -161,7 +161,7 @@ body::after {
     margin-bottom: 30px;
 }
 
-/* Ship Section (Left - Larger) */
+/* Ship Section (Left column - 2/3 width) */
 .ship-section {
     background: rgba(26, 31, 46, 0.95);
     padding: 30px;
@@ -373,11 +373,7 @@ body::after {
 @media (max-width: 1400px) {
     .main-game-area {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-    }
-    
-    .ship-section {
-        order: -1;
+        grid-template-rows: auto auto;
     }
 }
 
