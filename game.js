@@ -1,421 +1,317 @@
-// Moonrackers Web App - Game Logic
+// Moonrackers Lunar Bazaar - Risk of Rain 2 Inspired Game Logic
 
 // Game State
 const gameState = {
-    turn: 1,
-    phase: 'Setup',
-    prestige: 0,
-    credits: 10,
-    resources: {
-        energy: 0,
-        parts: 0,
-        science: 0,
-        exotic: 0
-    },
-    deck: 20,
-    discard: 0,
-    hand: [],
-    nextCardId: 1 // Counter for unique card IDs
+    lunarCoins: 5,
+    installedParts: [],
+    completedObjectives: []
 };
 
-// Contract Templates
-const contractTemplates = [
+// Objectives - Complete these to earn Lunar Coins
+const objectives = [
     {
-        title: "Lunar Mining Operation",
-        description: "Extract resources from the Moon's surface",
-        requirements: { energy: 2, parts: 1 },
-        rewards: { prestige: 3, credits: 5 }
+        id: 1,
+        title: "First Steps",
+        description: "Complete your first mission",
+        reward: 2,
+        completed: false
     },
     {
-        title: "Mars Research Station",
-        description: "Establish a scientific outpost on Mars",
-        requirements: { science: 3, parts: 2 },
-        rewards: { prestige: 5, credits: 8 }
+        id: 2,
+        title: "Resource Collector",
+        description: "Gather materials from asteroid fields",
+        reward: 3,
+        completed: false
     },
     {
-        title: "Asteroid Belt Survey",
-        description: "Map and analyze asteroid compositions",
-        requirements: { energy: 1, science: 2 },
-        rewards: { prestige: 4, credits: 6 }
+        id: 3,
+        title: "Deep Space Explorer",
+        description: "Venture into uncharted territories",
+        reward: 4,
+        completed: false
     },
     {
-        title: "Jupiter Reconnaissance",
-        description: "Study Jupiter's moons for colonization",
-        requirements: { exotic: 1, science: 2 },
-        rewards: { prestige: 6, credits: 10 }
+        id: 4,
+        title: "Lunar Prospector",
+        description: "Mine rare minerals from distant moons",
+        reward: 5,
+        completed: false
     },
     {
-        title: "Satellite Deployment",
-        description: "Launch communication satellites",
-        requirements: { parts: 3, energy: 1 },
-        rewards: { prestige: 3, credits: 7 }
+        id: 5,
+        title: "Stellar Cartographer",
+        description: "Map unknown star systems",
+        reward: 3,
+        completed: false
     },
     {
-        title: "Deep Space Probe",
-        description: "Send a probe beyond the solar system",
-        requirements: { exotic: 2, energy: 2 },
-        rewards: { prestige: 8, credits: 12 }
+        id: 6,
+        title: "Void Navigator",
+        description: "Traverse the mysterious void",
+        reward: 6,
+        completed: false
+    },
+    {
+        id: 7,
+        title: "Ancient Discovery",
+        description: "Uncover artifacts from lost civilizations",
+        reward: 7,
+        completed: false
+    },
+    {
+        id: 8,
+        title: "Master Explorer",
+        description: "Complete all exploration challenges",
+        reward: 10,
+        completed: false
     }
 ];
 
-// Market Items
-const marketItems = [
+// Ship Parts - Unique items purchasable with Lunar Coins
+const shipParts = [
     {
-        title: "Energy Cell",
-        type: "resource",
-        resource: "energy",
-        amount: 2,
-        cost: 3
+        id: 1,
+        name: "Quantum Drive",
+        description: "Increases travel speed through space-time",
+        cost: 5,
+        effect: "⚡ +50% Speed",
+        purchased: false
     },
     {
-        title: "Spare Parts",
-        type: "resource",
-        resource: "parts",
-        amount: 2,
-        cost: 3
+        id: 2,
+        name: "Void Shield Generator",
+        description: "Protects against void anomalies",
+        cost: 7,
+        effect: "🛡️ Immunity to Void Damage",
+        purchased: false
     },
     {
-        title: "Research Data",
-        type: "resource",
-        resource: "science",
-        amount: 2,
-        cost: 4
+        id: 3,
+        name: "Stellar Compass",
+        description: "Reveals hidden paths through the cosmos",
+        cost: 4,
+        effect: "🧭 Discover Secret Routes",
+        purchased: false
     },
     {
-        title: "Exotic Matter",
-        type: "resource",
-        resource: "exotic",
-        amount: 1,
-        cost: 5
+        id: 4,
+        name: "Lunar Harvester",
+        description: "Automatically collects nearby resources",
+        cost: 6,
+        effect: "💎 +2 Resources/Turn",
+        purchased: false
     },
     {
-        title: "Crew Engineer",
-        type: "crew",
-        description: "Provides +1 Parts per turn",
-        cost: 6
+        id: 5,
+        name: "Phase Stabilizer",
+        description: "Allows travel through unstable wormholes",
+        cost: 8,
+        effect: "🌀 Access Wormhole Network",
+        purchased: false
     },
     {
-        title: "Crew Scientist",
-        type: "crew",
-        description: "Provides +1 Science per turn",
-        cost: 6
-    }
-];
-
-// Card Templates for Player Hand
-const cardTemplates = [
-    {
-        title: "Thruster Boost",
-        type: "action",
-        description: "Gain 1 Energy",
-        effect: () => addResource('energy', 1)
+        id: 6,
+        name: "Cosmic Scanner",
+        description: "Detects rare anomalies from great distances",
+        cost: 5,
+        effect: "📡 +100% Detection Range",
+        purchased: false
     },
     {
-        title: "Repair Kit",
-        type: "action",
-        description: "Gain 1 Parts",
-        effect: () => addResource('parts', 1)
+        id: 7,
+        name: "Void Engine Core",
+        description: "Harnesses void energy for incredible power",
+        cost: 10,
+        effect: "⚛️ +200% Power Output",
+        purchased: false
     },
     {
-        title: "Quick Trade",
-        type: "action",
-        description: "Gain 2 Credits",
-        effect: () => addCredits(2)
-    },
-    {
-        title: "Research Grant",
-        type: "action",
-        description: "Gain 1 Science",
-        effect: () => addResource('science', 1)
+        id: 8,
+        name: "Time Dilation Field",
+        description: "Slows time around your ship in combat",
+        cost: 12,
+        effect: "⏱️ Slow Motion Combat",
+        purchased: false
     }
 ];
 
 // Initialize Game
 function initGame() {
-    logAction("Initializing game systems...");
+    logAction("🌙 Welcome to the Lunar Bazaar...");
+    logAction("Complete objectives to earn Lunar Coins and purchase unique ship parts.");
     
-    // Generate initial contracts
-    generateContracts();
+    // Generate objectives
+    generateObjectives();
     
-    // Generate market
-    generateMarket();
-    
-    // Deal initial hand
-    dealInitialHand();
+    // Generate bazaar items
+    generateBazaar();
     
     // Update UI
     updateUI();
-    
-    logAction("Game ready! Start your space venture.");
-    gameState.phase = 'Action Phase';
-    updatePhaseDisplay();
 }
 
-// Generate Contracts
-function generateContracts() {
-    const contractsGrid = document.getElementById('contracts-grid');
-    contractsGrid.innerHTML = '';
+// Generate Objectives
+function generateObjectives() {
+    const objectivesList = document.getElementById('objectives-list');
+    objectivesList.innerHTML = '';
     
-    // Select 4 random contracts
-    const selectedContracts = shuffleArray([...contractTemplates]).slice(0, 4);
-    
-    selectedContracts.forEach((contract, index) => {
-        const contractCard = createContractCard(contract, index);
-        contractsGrid.appendChild(contractCard);
+    objectives.forEach(objective => {
+        const objectiveCard = createObjectiveCard(objective);
+        objectivesList.appendChild(objectiveCard);
     });
 }
 
-// Create Contract Card Element
-function createContractCard(contract, index) {
+// Create Objective Card
+function createObjectiveCard(objective) {
     const card = document.createElement('div');
-    card.className = 'card';
-    card.dataset.index = index;
-    
-    const requirementsText = Object.entries(contract.requirements)
-        .map(([key, value]) => `${getResourceIcon(key)} ${value}`)
-        .join(' ');
+    card.className = 'objective-card' + (objective.completed ? ' completed' : '');
+    card.dataset.id = objective.id;
     
     card.innerHTML = `
-        <div class="card-title">${contract.title}</div>
-        <div class="card-content">${contract.description}</div>
-        <div class="card-cost">
-            <strong>Requires:</strong> ${requirementsText}
-        </div>
-        <div class="card-rewards">
-            <div class="reward-item">
-                <span>⭐ ${contract.rewards.prestige}</span>
-            </div>
-            <div class="reward-item">
-                <span>💰 ${contract.rewards.credits}</span>
-            </div>
+        <div class="objective-title">${objective.title}</div>
+        <div class="objective-description">${objective.description}</div>
+        <div class="objective-reward">
+            <span>🌙</span>
+            <span>${objective.reward} Lunar Coins</span>
+            ${objective.completed ? '<span style="margin-left: 10px;">✓ Completed</span>' : ''}
         </div>
     `;
     
-    card.addEventListener('click', () => attemptCompleteContract(contract));
+    if (!objective.completed) {
+        card.addEventListener('click', () => completeObjective(objective));
+    }
     
     return card;
 }
 
-// Attempt to Complete Contract
-function attemptCompleteContract(contract) {
-    const canComplete = Object.entries(contract.requirements).every(
-        ([resource, amount]) => gameState.resources[resource] >= amount
-    );
+// Complete Objective
+function completeObjective(objective) {
+    if (objective.completed) return;
     
-    if (canComplete) {
-        // Deduct resources
-        Object.entries(contract.requirements).forEach(([resource, amount]) => {
-            gameState.resources[resource] -= amount;
-        });
-        
-        // Award rewards
-        gameState.prestige += contract.rewards.prestige;
-        gameState.credits += contract.rewards.credits;
-        
-        logAction(`✅ Completed "${contract.title}"! Gained ${contract.rewards.prestige} prestige and ${contract.rewards.credits} credits.`);
-        
-        // Regenerate contracts
-        generateContracts();
-        updateUI();
-        
-        // Check win condition
-        if (gameState.prestige >= 20) {
-            logAction("🎉 VICTORY! You've reached 20 prestige points!");
-            alert("Congratulations! You've won the game with " + gameState.prestige + " prestige points!");
-        }
-    } else {
-        logAction(`❌ Cannot complete "${contract.title}" - insufficient resources.`);
+    objective.completed = true;
+    gameState.completedObjectives.push(objective.id);
+    gameState.lunarCoins += objective.reward;
+    
+    logAction(`✅ Completed "${objective.title}"! Earned ${objective.reward} 🌙 Lunar Coins.`, 'success');
+    
+    // Regenerate objectives display
+    generateObjectives();
+    updateUI();
+    
+    // Check if all objectives complete
+    if (gameState.completedObjectives.length === objectives.length) {
+        logAction("🎉 All objectives completed! You are a Master Explorer!", 'success');
     }
 }
 
-// Generate Market
-function generateMarket() {
-    const marketGrid = document.getElementById('market-grid');
-    marketGrid.innerHTML = '';
+// Generate Bazaar
+function generateBazaar() {
+    const bazaarItems = document.getElementById('bazaar-items');
+    bazaarItems.innerHTML = '';
     
-    marketItems.forEach((item, index) => {
-        const marketCard = createMarketCard(item, index);
-        marketGrid.appendChild(marketCard);
+    shipParts.forEach(part => {
+        const bazaarItem = createBazaarItem(part);
+        bazaarItems.appendChild(bazaarItem);
     });
 }
 
-// Create Market Card Element
-function createMarketCard(item, index) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.dataset.index = index;
+// Create Bazaar Item
+function createBazaarItem(part) {
+    const item = document.createElement('div');
+    item.className = 'bazaar-item' + (part.purchased ? ' purchased' : '');
+    item.dataset.id = part.id;
     
-    let contentHTML = '';
-    if (item.type === 'resource') {
-        contentHTML = `
-            <div class="card-title">${item.title}</div>
-            <div class="card-content">
-                ${getResourceIcon(item.resource)} +${item.amount} ${capitalizeFirst(item.resource)}
-            </div>
-            <div class="card-cost">
-                <strong>Cost:</strong> 💰 ${item.cost}
-            </div>
-        `;
-    } else if (item.type === 'crew') {
-        contentHTML = `
-            <div class="card-title">${item.title}</div>
-            <div class="card-content">${item.description}</div>
-            <div class="card-cost">
-                <strong>Cost:</strong> 💰 ${item.cost}
-            </div>
-        `;
+    item.innerHTML = `
+        <div class="bazaar-item-header">
+            <span class="bazaar-item-name">${part.name}</span>
+            <span class="bazaar-item-cost">
+                <span>🌙</span>
+                <span>${part.cost}</span>
+            </span>
+        </div>
+        <div class="bazaar-item-description">${part.description}</div>
+        <div class="bazaar-item-description" style="margin-top: 8px; color: #fbbf24; font-weight: bold;">
+            ${part.effect}
+        </div>
+        ${part.purchased ? '<div style="margin-top: 8px; color: #10b981; font-weight: bold;">✓ Installed</div>' : ''}
+    `;
+    
+    if (!part.purchased) {
+        item.addEventListener('click', () => purchasePart(part));
     }
     
-    card.innerHTML = contentHTML;
-    card.addEventListener('click', () => purchaseItem(item));
-    
-    return card;
+    return item;
 }
 
-// Purchase Market Item
-function purchaseItem(item) {
-    if (gameState.credits >= item.cost) {
-        gameState.credits -= item.cost;
+// Purchase Ship Part
+function purchasePart(part) {
+    if (part.purchased) {
+        logAction(`You already own the ${part.name}.`, 'error');
+        return;
+    }
+    
+    if (gameState.lunarCoins >= part.cost) {
+        gameState.lunarCoins -= part.cost;
+        part.purchased = true;
+        gameState.installedParts.push(part);
         
-        if (item.type === 'resource') {
-            addResource(item.resource, item.amount);
-            logAction(`Purchased ${item.title} for ${item.cost} credits.`);
-        } else if (item.type === 'crew') {
-            // Note: Crew mechanics are a planned enhancement for future updates
-            logAction(`Hired ${item.title} for ${item.cost} credits. (Crew effects coming soon!)`);
-        }
+        logAction(`✨ Purchased ${part.name} for ${part.cost} 🌙 Lunar Coins!`, 'success');
+        
+        // Regenerate bazaar display
+        generateBazaar();
+        
+        // Update installed parts display
+        updateInstalledParts();
         
         updateUI();
-    } else {
-        logAction(`❌ Cannot afford ${item.title} - need ${item.cost} credits.`);
-    }
-}
-
-// Deal Initial Hand
-function dealInitialHand() {
-    gameState.hand = [];
-    for (let i = 0; i < 5; i++) {
-        const randomCard = cardTemplates[Math.floor(Math.random() * cardTemplates.length)];
-        gameState.hand.push({ ...randomCard, id: gameState.nextCardId++ });
-    }
-    displayHand();
-}
-
-// Display Player Hand
-function displayHand() {
-    const handCards = document.getElementById('hand-cards');
-    handCards.innerHTML = '';
-    
-    gameState.hand.forEach((card, index) => {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'hand-card';
-        cardElement.dataset.index = index;
         
-        cardElement.innerHTML = `
-            <div class="card-title">${card.title}</div>
-            <div class="card-content">${card.description}</div>
+        // Check if all parts purchased
+        if (gameState.installedParts.length === shipParts.length) {
+            logAction("🚀 Ship fully upgraded! All parts installed!", 'success');
+        }
+    } else {
+        const needed = part.cost - gameState.lunarCoins;
+        logAction(`❌ Not enough Lunar Coins. Need ${needed} more to purchase ${part.name}.`, 'error');
+    }
+}
+
+// Update Installed Parts Display
+function updateInstalledParts() {
+    const partsGrid = document.getElementById('parts-grid');
+    partsGrid.innerHTML = '';
+    
+    if (gameState.installedParts.length === 0) {
+        partsGrid.innerHTML = '<p style="text-align: center; color: #94a3b8; grid-column: 1 / -1;">No parts installed yet</p>';
+        return;
+    }
+    
+    gameState.installedParts.forEach(part => {
+        const partItem = document.createElement('div');
+        partItem.className = 'part-item';
+        
+        partItem.innerHTML = `
+            <span class="part-item-name">${part.name}</span>
+            <span class="part-item-effect">${part.effect}</span>
         `;
         
-        cardElement.addEventListener('click', () => playCard(index));
-        handCards.appendChild(cardElement);
+        partsGrid.appendChild(partItem);
     });
-}
-
-// Play Card from Hand
-function playCard(index) {
-    const card = gameState.hand[index];
-    
-    if (card.effect) {
-        card.effect();
-        logAction(`Played "${card.title}"`);
-    }
-    
-    // Move card to discard
-    gameState.hand.splice(index, 1);
-    gameState.discard++;
-    
-    displayHand();
-    updateUI();
-}
-
-// Add Resource
-function addResource(resourceType, amount) {
-    gameState.resources[resourceType] += amount;
-    updateUI();
-}
-
-// Add Credits
-function addCredits(amount) {
-    gameState.credits += amount;
-    updateUI();
 }
 
 // Update UI
 function updateUI() {
-    // Update prestige and credits
-    document.getElementById('prestige').textContent = gameState.prestige;
-    document.getElementById('credits').textContent = gameState.credits;
+    // Update lunar coins
+    document.getElementById('lunar-coins').textContent = gameState.lunarCoins;
     
-    // Update resources
-    document.getElementById('energy').textContent = gameState.resources.energy;
-    document.getElementById('parts').textContent = gameState.resources.parts;
-    document.getElementById('science').textContent = gameState.resources.science;
-    document.getElementById('exotic').textContent = gameState.resources.exotic;
-    
-    // Update deck info
-    document.getElementById('deck-count').textContent = gameState.deck;
-    document.getElementById('discard-count').textContent = gameState.discard;
-    
-    // Update turn number
-    document.getElementById('turn-number').textContent = gameState.turn;
-}
-
-// Update Phase Display
-function updatePhaseDisplay() {
-    document.getElementById('current-phase').textContent = gameState.phase;
-}
-
-// Next Phase Handler
-function nextPhase() {
-    const phases = ['Action Phase', 'Market Phase', 'Cleanup Phase'];
-    const currentIndex = phases.indexOf(gameState.phase);
-    
-    if (currentIndex < phases.length - 1) {
-        gameState.phase = phases[currentIndex + 1];
-        logAction(`Entering ${gameState.phase}`);
-    } else {
-        // New turn
-        gameState.turn++;
-        gameState.phase = 'Action Phase';
-        
-        // Draw new cards if hand is empty
-        if (gameState.hand.length < 5) {
-            const cardsToDraw = 5 - gameState.hand.length;
-            for (let i = 0; i < cardsToDraw; i++) {
-                if (gameState.deck > 0) {
-                    const randomCard = cardTemplates[Math.floor(Math.random() * cardTemplates.length)];
-                    gameState.hand.push({ ...randomCard, id: gameState.nextCardId++ });
-                    gameState.deck--;
-                }
-            }
-            displayHand();
-        }
-        
-        // Add passive income
-        gameState.credits += 2;
-        
-        logAction(`=== Turn ${gameState.turn} begins ===`);
-    }
-    
-    updatePhaseDisplay();
-    updateUI();
+    // Update parts count
+    document.getElementById('parts-count').textContent = gameState.installedParts.length;
 }
 
 // Log Action
-function logAction(message) {
+function logAction(message, type = '') {
     const logContent = document.getElementById('log-content');
     const entry = document.createElement('p');
-    entry.className = 'log-entry';
+    entry.className = 'log-entry' + (type ? ' ' + type : '');
     entry.textContent = message;
     logContent.appendChild(entry);
     
@@ -423,33 +319,7 @@ function logAction(message) {
     logContent.scrollTop = logContent.scrollHeight;
 }
 
-// Utility Functions
-function shuffleArray(array) {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
-}
-
-function getResourceIcon(resource) {
-    const icons = {
-        energy: '🔋',
-        parts: '⚙️',
-        science: '🧪',
-        exotic: '💎'
-    };
-    return icons[resource] || '❓';
-}
-
-function capitalizeFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
     initGame();
-    
-    document.getElementById('next-phase-btn').addEventListener('click', nextPhase);
 });
